@@ -30,6 +30,14 @@ namespace Xamarin.Forms
 			(bindable as GradientBrush)?.UpdateGradientStops(oldValue as GradientStopCollection, newValue as GradientStopCollection);
 		}
 
+		protected override void OnBindingContextChanged()
+		{
+			foreach (var item in GradientStops)
+				SetInheritedBindingContext(item, BindingContext);
+
+			base.OnBindingContextChanged();
+		}
+
 		void UpdateGradientStops(GradientStopCollection oldCollection, GradientStopCollection newCollection)
 		{
 			if (oldCollection != null)
